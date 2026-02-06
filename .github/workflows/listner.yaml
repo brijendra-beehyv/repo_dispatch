@@ -1,22 +1,15 @@
 name: Event Handler
 
 on:
-  push:
-    branches: [ main ]
+  repository_dispatch:
+    types: [Event_XYZ]
 
 jobs:
-  emmit_event:
+  XYZ:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Dispatch event
+      - name: Print Payload
         run: |
-          curl -X POST https://api.github.com/repos/brijendra-beehyv/repo_dispatch/dispatches \
-            -H "Accept: application/vnd.github+json" \
-            -H "Authorization: Bearer ${{ secrets.GITHUB_TOKEN }}" \
-            -d '{
-                  "event_type": "deploy-event",
-                  "client_payload": {
-                    "env": "staging"
-                  }
-                }'
+          echo Param1 is {{ github.event.client_name.Param1 }}
+          echo Param2 is {{ github.event.client_name.Param1 }}
