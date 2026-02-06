@@ -1,0 +1,16 @@
+name: Event caller
+
+on:
+  repository_dispatch:
+    types: [Event_XYZ]
+
+jobs:
+  XYZ:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Print Payload
+        run: |
+          echo Param1 is {{ github.event.client_name.Param1 }}
+          echo Param2 is {{ github.event.client_name.Param1 }}
+
